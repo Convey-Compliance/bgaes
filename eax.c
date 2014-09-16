@@ -308,6 +308,10 @@ ret_type eax_crypt_data(                    /* encrypt or decrypt data      */
     return RETURN_GOOD;
 }
 
+#ifdef _MSC_VER
+  __pragma(warning( push ))
+  __pragma(warning( disable : 4706 ))
+#endif
 ret_type eax_compute_tag(                   /* compute authentication tag   */
             unsigned char tag[],            /* the buffer for the tag       */
             unsigned long tag_len,          /* and its length in bytes      */
@@ -346,6 +350,9 @@ ret_type eax_compute_tag(                   /* compute authentication tag   */
 
     return (ctx->txt_ccnt == ctx->txt_acnt ? RETURN_GOOD : RETURN_WARN);
 }
+#ifdef _MSC_VER
+  __pragma(warning( pop ))
+#endif
 
 ret_type eax_end(                           /* clean up and end operation   */
             eax_ctx ctx[1])                 /* the mode context             */
